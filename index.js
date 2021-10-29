@@ -65,7 +65,6 @@ async function run() {
             res.json(result);
         })
 
-
         // PUT API
 
         app.put('/bookedevents/:id', async (req, res) => {
