@@ -60,41 +60,27 @@ async function run() {
         //Delete API
         app.delete('/bookedevents/:id', async (req, res) => {
             const id = req.params.id;
-            console.log(id);
             const query = { _id: ObjectId(id) };
             const result = await bookedEvent.deleteOne(query);
             res.json(result);
         })
 
 
+        // PUT API
 
-        //     //GET API
-        //     app.get('/enrolledcourses/:email', async(req, res) => {
-        //       const email = req.params.email;
-        //       const result = await enrolledCourses.find({email:{$regex: email}}).toArray();
-        //       // const result = await enrolledCourses.insertOne(enrolled);
-        //       res.send(result);
-        //   })
-
-
-
-        //UPDATE or PUT API
-
-        /* app.put('/users/:id', async(req, res) => {
-          const id = req.params.id;
-          const updatedUser = req.body;
-          const filter = {_id: ObjectId(id)};
-          const options = {upsert: true};
-          const updatedDoc = {
-            $set:{
-              name: updatedUser.name,
-              email: updatedUser.email
-            }
-          };
-          const result = await usersCollection.updateOne(filter, updatedDoc, options);
-          console.log("updated user", id);
-          res.json(result);
-        }) */
+        app.put('/bookedevents/:id', async (req, res) => {
+            const id = req.params.id;
+            const getStatus = req.body;
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updatedStatus = {
+                $set: {
+                    status: getStatus.status,
+                }
+            };
+            const result = await bookedEvent.updateOne(filter, updatedStatus, options);
+            res.json(result);
+        })
 
     } finally {
         // await client.close();
