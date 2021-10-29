@@ -29,6 +29,13 @@ async function run() {
             res.send(result);
         })
 
+
+        app.get('/bookedevents', async (req, res) => {
+
+            const result = await bookedEvent.find({}).toArray();
+            res.send(result);
+        })
+
         //GET API
         app.get('/tourplans/:id', async (req, res) => {
             const query = { _id: ObjectId(req.params.id) };
@@ -36,12 +43,30 @@ async function run() {
             res.send(result);
         })
 
-        //POST API
         app.post('/bookedevents', async (req, res) => {
             const item = req.body;
             const result = await bookedEvent.insertOne(item);
             res.send(result);
         })
+
+
+        //GET API
+        app.get('/bookedevents/:email', async (req, res) => {
+            const email = req.params.email;
+            const result = await bookedEvent.find({ email: { $regex: email } }).toArray();
+            res.send(result);
+        })
+
+        //Delete API
+        app.delete('/bookedevents/:id', async (req, res) => {
+            const id = req.params.id;
+            console.log(id);
+            const query = { _id: ObjectId(id) };
+            const result = await bookedEvent.deleteOne(query);
+            res.json(result);
+        })
+
+
 
         //     //GET API
         //     app.get('/enrolledcourses/:email', async(req, res) => {
@@ -51,12 +76,7 @@ async function run() {
         //       res.send(result);
         //   })
 
-        // app.delete('/services/:id', async(req, res)=>{
-        //     const id = req.params.id;
-        //     const query = {_id: ObjectId(id)};
-        //     const result = await servicesCollection.deleteOne(query);
-        //     res.json(result);
-        // })
+
 
         //UPDATE or PUT API
 
