@@ -21,6 +21,7 @@ async function run() {
 
         const database = client.db("travel_agency");
         const tourPlans = database.collection("tour_plans")
+        const bookedEvent = database.collection("booked_event")
 
         //GET API
         app.get('/tourplans', async (req, res) => {
@@ -28,18 +29,19 @@ async function run() {
             res.send(result);
         })
 
+        //GET API
         app.get('/tourplans/:id', async (req, res) => {
             const query = { _id: ObjectId(req.params.id) };
             const result = await tourPlans.findOne(query);
             res.send(result);
         })
 
-        //     //POST API
-        //     app.post('/enrolledcourses', async(req, res) => {
-        //         const enrolled = req.body;
-        //         const result = await enrolledCourses.insertOne(enrolled);
-        //         res.send(result);
-        //     })
+        //POST API
+        app.post('/bookedevents', async (req, res) => {
+            const item = req.body;
+            const result = await bookedEvent.insertOne(item);
+            res.send(result);
+        })
 
         //     //GET API
         //     app.get('/enrolledcourses/:email', async(req, res) => {
