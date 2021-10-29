@@ -29,7 +29,7 @@ async function run() {
             res.send(result);
         })
 
-
+        //GET API
         app.get('/bookedevents', async (req, res) => {
 
             const result = await bookedEvent.find({}).toArray();
