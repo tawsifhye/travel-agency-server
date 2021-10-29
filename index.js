@@ -28,6 +28,12 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/tourplans/:id', async (req, res) => {
+            const query = { _id: ObjectId(req.params.id) };
+            const result = await tourPlans.findOne(query);
+            res.send(result);
+        })
+
         //     //POST API
         //     app.post('/enrolledcourses', async(req, res) => {
         //         const enrolled = req.body;
@@ -43,6 +49,30 @@ async function run() {
         //       res.send(result);
         //   })
 
+        // app.delete('/services/:id', async(req, res)=>{
+        //     const id = req.params.id;
+        //     const query = {_id: ObjectId(id)};
+        //     const result = await servicesCollection.deleteOne(query);
+        //     res.json(result);
+        // })
+
+        //UPDATE or PUT API
+
+        /* app.put('/users/:id', async(req, res) => {
+          const id = req.params.id;
+          const updatedUser = req.body;
+          const filter = {_id: ObjectId(id)};
+          const options = {upsert: true};
+          const updatedDoc = {
+            $set:{
+              name: updatedUser.name,
+              email: updatedUser.email
+            }
+          };
+          const result = await usersCollection.updateOne(filter, updatedDoc, options);
+          console.log("updated user", id);
+          res.json(result);
+        }) */
 
     } finally {
         // await client.close();
