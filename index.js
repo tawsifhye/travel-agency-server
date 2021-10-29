@@ -57,16 +57,8 @@ async function run() {
             res.send(result);
         })
 
-        //Delete API
-        app.delete('/bookedevents/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) };
-            const result = await bookedEvent.deleteOne(query);
-            res.json(result);
-        })
 
         // PUT API
-
         app.put('/bookedevents/:id', async (req, res) => {
             const id = req.params.id;
             const getStatus = req.body;
@@ -80,6 +72,15 @@ async function run() {
             const result = await bookedEvent.updateOne(filter, updatedStatus, options);
             res.json(result);
         })
+
+        //Delete API
+        app.delete('/bookedevents/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await bookedEvent.deleteOne(query);
+            res.json(result);
+        })
+
 
     } finally {
         // await client.close();
